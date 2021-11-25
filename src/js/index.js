@@ -6,6 +6,7 @@ import 'regenerator-runtime/runtime';
 
 //components
 import "./components/game";
+import "./components/register-player";
 
 
 $(function () {
