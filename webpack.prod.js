@@ -29,14 +29,7 @@ module.exports = merge(common, {
                             attrs: [':src']
                         }
                     },
-                    {
-                        loader: 'twig-html-loader',
-                        options: {
-                            namespaces: {
-                                '@': path.resolve(__dirname, "src")
-                            }
-                        }
-                    }
+                    'twig-html-loader'
                 ]
             },
             {

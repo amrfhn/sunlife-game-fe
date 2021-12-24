@@ -27,15 +27,7 @@ module.exports = merge(common, {
                             attrs: [':src']
                         }
                     },
-                    {
-                        loader: 'twig-html-loader',
-                        options: {
-                            cache: true,
-                            namespaces: {
-                                '@': path.resolve(__dirname, "src")
-                            }
-                        }
-                    }
+                    'twig-html-loader'
                 ]
             },
             {
@@ -84,9 +76,9 @@ module.exports = merge(common, {
                 test: /.(sa|sc|c)ss$/,
                 exclude: [/node_modules\/overlayscrollbars/],
                 use: [
-                    { loader: 'style-loader' },
-
-                    'cache-loader',
+                    // Transform css and extract into separate single bundle
+                    // Required to generate the file
+                    { loader: MiniCssExtractPlugin.loader },
 
                     // Handles url() and @imports
                     { 
@@ -113,15 +105,11 @@ module.exports = merge(common, {
             }
         ]
     },
-    devtool: "eval",
-    devServer: {
-        overlay: true,
-        compress: true,
-        contentBase: [
-            path.join(__dirname, 'src/templates/')
-        ]
-    },
+    devtool: "source-map",
     plugins: [
+        new MiniCssExtractPlugin({
+            filename: "css/bundle.[hash].css"
+        }),
         new CssUrlRelativePlugin()
     ]
 })
